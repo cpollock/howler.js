@@ -487,6 +487,7 @@
       self._onrate = o.onrate ? [{fn: o.onrate}] : [];
       self._onseek = o.onseek ? [{fn: o.onseek}] : [];
       self._onresume = [];
+      self._onprogress = [];
 
       // Web Audio or HTML5 Audio?
       self._webAudio = Howler.usingWebAudio && !self._html5;
@@ -2066,6 +2067,11 @@
           self.load();
         }
       };
+      xhr.onprogress = function(e) {
+        if(e.lengthComputable) {
+          self._emit('progress', null, {loaded: e.loaded, total: e.total});
+        }
+      }
       safeXhrSend(xhr);
     }
   };
