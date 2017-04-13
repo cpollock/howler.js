@@ -1595,6 +1595,10 @@
       return self;
     },
 
+    buffer: function() {
+      return cache[this._src];
+    },
+
     /**
      * Emit all events of a specific type and pass the sound id.
      * @param  {String} event Event name.
